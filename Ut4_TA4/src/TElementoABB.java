@@ -112,9 +112,9 @@ public class TElementoABB<T extends Comparable<T>> {
         TElementoABB<T> nodoActual = this;
         TElementoABB<T> anterior = null;
         while (nodoActual != null) {
-            if (elemento.getElemento().compareTo(nodoActual.getElemento()) < 0) { //Si el elemento es menor al elemento del nodo actual
+            if (elemento.getElemento().compareTo(nodoActual.getElemento()) < 0) { /*si el elemento es menor al elemento del nodo actual*/
                 nodoActual = nodoActual.izquierdo;
-            } else if (elemento.getElemento().compareTo(nodoActual.getElemento()) > 0) { //si el elemento es mayor al elemento del nodo actual
+            } else if (elemento.getElemento().compareTo(nodoActual.getElemento()) > 0) { /*si el elemento es mayor al elemento del nodo actual*/
                 anterior = nodoActual;
                 nodoActual = nodoActual.derecho;
             } else {

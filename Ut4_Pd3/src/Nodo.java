@@ -49,7 +49,9 @@ public class Nodo<T> implements INodo<T> {
         if (nodo.getEtiqueta().compareTo(this.etiqueta) < 0) {
             if (izquierda == null) {
                 izquierda = nodo;
+                System.out.println("NODO INSERTADO:" + nodo.dato);
                 return true;
+
             }
             else{
                 izquierda.insertar(nodo);
@@ -58,6 +60,7 @@ public class Nodo<T> implements INodo<T> {
         if(nodo.getEtiqueta().compareTo(this.etiqueta)>0){
             if (derecha == null) {
                 derecha = nodo;
+                System.out.println("NODO INSERTADO:" +  nodo.dato);
                 return true;
             }
             else{

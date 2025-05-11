@@ -7,10 +7,10 @@ public class Main {
     public static void main(String[] args) {
         ConstructorArbolPrefijo constructor = new ConstructorArbolPrefijo();
         String[] expresion2 = ConstructorArbolPrefijo.convertirExpresion("+ 1 * 2 - 3 4");
-        probarExpresion(constructor, expresion2); // Result -1
+        probarExpresion(constructor, expresion2); /* resultado -1*/
 
         String[] expresion3 = ConstructorArbolPrefijo.convertirExpresion("/ * + 1 2 - 3 4 5");
-        probarExpresion(constructor, expresion3); // Result 0
+        probarExpresion(constructor, expresion3); /*resultado 0*/
     }
 
     private static void probarExpresion(ConstructorArbolPrefijo constructor,

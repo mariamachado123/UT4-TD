@@ -45,7 +45,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
                 return true;
             }
         } else {
-            // ya existe un elemento con la misma etiqueta.-
+
             return false;
         }
     }
@@ -235,7 +235,6 @@ public class TElementoAB<T> implements IElementoAB<T> {
         }
         elHijo.setHijoDer(hijoDer);
 
-        // Se desconectan los hijos del nodo actual para facilitar el trabajo del recolector de basura
         setHijoIzq(null);
         setHijoDer(null);
 

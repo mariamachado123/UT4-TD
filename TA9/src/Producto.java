@@ -36,8 +36,6 @@ public class Producto implements IProducto {
         this.stock += stock;
     }
 
-    // restarStock devolverá -1 si se pretende extraer más de lo que hay...
-    // y el campo stock quedará inalterado
     public Integer restarStock(Integer stock) {
         if (stock > this.stock) {
             return -1;
