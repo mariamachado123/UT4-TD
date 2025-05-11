@@ -50,20 +50,34 @@ public class TArbolBB<T extends Comparable<T>> {
     public boolean esVacio() {
         return raiz == null;
     }
-    public boolean insertar(TElementoABB<T> unElemento) {
-        if (esVacio()) {
-            raiz = ((TElementoABB<T>) unElemento);
-            contadorInserciones++;
-            System.out.println("Elemento insertado. Contador de inserciones: " + contadorInserciones);
+    public boolean insertar(Comparable etiqueta, T dato) {
+        if (raiz == null) {
+            raiz = new TElementoABB<>(dato);
             return true;
-        } else {
-            boolean resultado = raiz.insertar((TElementoABB<T>) unElemento);
-            if (resultado) {
-                contadorInserciones++;
-                System.out.println("Elemento insertado. Contador de inserciones: " + contadorInserciones);
-            }
-            return resultado;
         }
+        return insertarRec(raiz, etiqueta, dato);
     }
+
+    private boolean insertarRec(TElementoABB<T> actual, Comparable etiqueta, T dato) {
+        int comparacion = etiqueta.compareTo(actual.getClave());
+
+        if (comparacion < 0) {
+            if (actual.getHijoIzq() == null) {
+                actual.setHijoIzq(new TElementoABB<>(dato));
+                return true;
+            } else {
+                return insertarRec(actual.getHijoIzq(), etiqueta, dato);
+            }
+        } else if (comparacion > 0) {
+            if (actual.getHijoDer() == null) {
+                actual.setHijoDer(new TElementoABB<>(dato));
+                return true;
+            } else {
+                return insertarRec(actual.getHijoDer(), etiqueta, dato);
+            }
+        }
+        return false;
+    }
+
 
 }

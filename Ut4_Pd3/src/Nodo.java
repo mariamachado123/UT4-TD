@@ -42,32 +42,7 @@ public class Nodo<T> implements INodo<T> {
     public void setIzquierda(Nodo<T> siguiente) {
         izquierda = siguiente;
 
-    }
 
-    @Override
-    public boolean insertar(Nodo<T> nodo) {
-        if (nodo.getEtiqueta().compareTo(this.etiqueta) < 0) {
-            if (izquierda == null) {
-                izquierda = nodo;
-                System.out.println("NODO INSERTADO:" + nodo.dato);
-                return true;
-
-            }
-            else{
-                izquierda.insertar(nodo);
-            }
-        }
-        if(nodo.getEtiqueta().compareTo(this.etiqueta)>0){
-            if (derecha == null) {
-                derecha = nodo;
-                System.out.println("NODO INSERTADO:" +  nodo.dato);
-                return true;
-            }
-            else{
-                derecha.insertar(nodo);
-            }
-        }
-        return false;
     }
     public int hojasAux() {
         int cantidad = 0;
@@ -84,8 +59,32 @@ public class Nodo<T> implements INodo<T> {
         }
         System.out.println("Cantidad total de hojas: " + cantidad);
         return cantidad;
+    }
+    @Override
+    public int sumaDeClavesDelArbol(){
+        int suma= (int) this.etiqueta;
+        if (this.getIzquierda() != null) {
+            suma += this.getIzquierda().sumaDeClavesDelArbol();
+        }
+        if (this.getDerecha() != null) {
+            suma += this.getDerecha().sumaDeClavesDelArbol();
+        }
+        System.out.println("Suma de claves: " + suma);
+        return suma;
+    }
+    @Override
+    public int cantNodos(Nodo<T> nodo, int nivelObj, int nivelActual) {
+        if (nodo == null) {
+            return 0;
+        }
+        if (nivelActual == nivelObj) {
+            return 1;
+        }
+        return cantNodos(nodo.izquierda, nivelObj, nivelActual + 1)+
+        cantNodos(nodo.derecha, nivelObj, nivelActual + 1);
 
     }
+
 }
 
 

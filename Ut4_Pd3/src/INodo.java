@@ -5,5 +5,6 @@ public interface INodo<T>{
 
     void setDerecha(Nodo<T> nodo);
     void setIzquierda(Nodo<T> nodo);
-    public boolean insertar(Nodo<T> nodo);
+    public int sumaDeClavesDelArbol();
+    public int cantNodos(Nodo<T> nodo, int nivelObj, int nivelActual);
 }

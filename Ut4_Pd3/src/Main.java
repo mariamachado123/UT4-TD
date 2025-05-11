@@ -3,15 +3,17 @@
 public class Main {
     public static void main(String[] args) {
         ABB<String> arbol = new ABB<>();
-        arbol.insertar(12, "raiz");
-        arbol.insertar(10, "hijoIzquierdo");
-        arbol.insertar(15, "hijoDerecho");
-        arbol.insertar(13, "hijoDerecho1");
+
+        arbol.insertar(10, "Raíz");
+        arbol.insertar(5, "Izquierda");
+        arbol.insertar(15, "Derecha");
+        arbol.insertar(3, "Nieto izquierdo");
+        arbol.insertar(7, "Nieto derecho");
         arbol.hojas();
+        arbol.sumaDeClavesDelArbol();
+        System.out.println("Nodos en nivel 1: " + arbol.cantNodos(null, 1, 0));
 
 
 
-
-
-        }
+    }
     }
