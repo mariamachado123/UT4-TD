@@ -6,6 +6,8 @@ public class Main {
         arbol.insertar(12, "raiz");
         arbol.insertar(10, "hijoIzquierdo");
         arbol.insertar(15, "hijoDerecho");
+        arbol.insertar(13, "hijoDerecho1");
+        arbol.hojas();
 
 
 

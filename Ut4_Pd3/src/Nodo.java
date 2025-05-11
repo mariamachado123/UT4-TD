@@ -82,7 +82,9 @@ public class Nodo<T> implements INodo<T> {
                 cantidad += this.getDerecha().hojasAux();
             }
         }
+        System.out.println("Cantidad total de hojas: " + cantidad);
         return cantidad;
+
     }
 }
 
