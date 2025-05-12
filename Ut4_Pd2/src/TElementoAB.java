@@ -1,13 +1,11 @@
 public class TElementoAB<T> implements IElementoAB<T> {
     private T elemento;
-    private TElementoAB<T> raiz;
     private TElementoAB<T> izquierdo;
     private TElementoAB<T> derecho;
     private final Comparable etiqueta;
 
     public TElementoAB(Comparable etiqueta,T elemento) {
         this.elemento = elemento;
-        this.raiz = null;
         this.izquierdo = null;
         this.derecho = null;
         this.etiqueta = etiqueta;
@@ -42,62 +40,34 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     @Override
     public TElementoAB<T> buscar(Comparable unaEtiqueta) {
-        if(unaEtiqueta==null || this.etiqueta==null){
-            System.out.println("ELEMENTO NO ENCONTRADO(null): "+ unaEtiqueta);
+        if (unaEtiqueta == null || this.etiqueta == null) {
+            System.out.println("Búsqueda con parámetro null");
             return null;
         }
-        if (unaEtiqueta.equals(this.etiqueta)) {
-            System.out.println("ELEMENTO ENCONTRADO: " + unaEtiqueta);
-            return this.raiz;
-        }
-        if (unaEtiqueta.compareTo(this.etiqueta) < 0) {
-            if (izquierdo != null) {
-                return izquierdo.buscar(unaEtiqueta);
-            }else{
-                System.out.println("ELEMENTO NO ENCONTRADO: " + unaEtiqueta);
-                return null;
-            }
-        } else {
-            if (derecho != null) {
-                return  derecho.buscar(unaEtiqueta);
-            }else {
-                System.out.println("ELEMENTO NO ENCONTRADO: " + unaEtiqueta);
-                return null;
-            }
 
+        int comparacion = unaEtiqueta.compareTo(this.etiqueta);
+
+        if (comparacion == 0) {
+            System.out.println("¡Encontrado!: " + unaEtiqueta);
+            return this;
         }
 
+        TElementoAB<T> resultado = null;
+        if (comparacion < 0 && izquierdo != null) {
+            resultado = izquierdo.buscar(unaEtiqueta);
+        } else if (comparacion > 0 && derecho != null) {
+            resultado = derecho.buscar(unaEtiqueta);
+        }
+
+        if (resultado == null) {
+            if(izquierdo==null && derecho==null) {
+                System.out.println(unaEtiqueta + " no existe en este subárbol");
+            }
+        }
+
+        return resultado;
     }
 
-    @Override
-    public boolean insertar(TElementoAB<T> elemento) {
-        if(this.etiqueta == null || this.etiqueta.equals(elemento.getEtiqueta())) {
-            return false;
-        }
-        if (elemento.getEtiqueta().compareTo(this.etiqueta) < 0) {
-            if (izquierdo == null) {
-                izquierdo = elemento;
-                System.out.println("ELEMENTO INSERTADO: "+ elemento.getEtiqueta().toString());
-                return true;
-            } else {
-                if(izquierdo.insertar(elemento)){
-                    return true;
-                }
-                return false;
-
-            }
-        }
-        if (derecho == null) {
-            derecho = elemento;
-            System.out.println("ELEMENTO INSERTADO: "+ elemento.getEtiqueta().toString());
-            return true;
-        } else {
-            if(derecho.insertar(elemento)){
-                return true;
-            }
-            return false;
-        }
-    }
 
 
 
@@ -107,10 +77,10 @@ public class TElementoAB<T> implements IElementoAB<T> {
         resultado = resultado + imprimir() + " ";
 
         if (izquierdo != null) {
-            resultado = izquierdo.preOrden();
+            resultado += izquierdo.preOrden();
         }
         if (derecho != null) {
-            resultado = derecho.preOrden();
+            resultado += derecho.preOrden();
         }
         return resultado;
 
@@ -137,40 +107,28 @@ public class TElementoAB<T> implements IElementoAB<T> {
     public String postOrden() {
         String resultado = "";
         if (izquierdo != null) {
-            resultado = izquierdo.postOrden();
+            resultado += izquierdo.postOrden();
         }
         if (derecho != null) {
-            resultado = derecho.postOrden();
+            resultado += derecho.postOrden();
         }
-        if(elemento != null) {
-            resultado = elemento.toString();
-        }
-        resultado = resultado + imprimir()+ " ";
+        resultado += resultado + imprimir()+ " ";
         return resultado;
 
     }
     public String PreOrdenNivel(int nivel){
-        String resultado = "";
-        if (nivel<0) {
-            return "";
-        }
-        if (nivel==0) {
-            return this.etiqueta.toString() + " ";
-        }
-        if(this.etiqueta==null){
-            return resultado;
-        }
+        StringBuilder resultado = new StringBuilder();
         for (int i = 0; i < nivel; i++) {
-            resultado = resultado + "  ";
+            resultado.append("  ");
         }
-        resultado = resultado + this.etiqueta.toString() + " ";
+        resultado.append(this.etiqueta).append("\n");
         if (izquierdo != null) {
-            resultado = resultado + izquierdo.PreOrdenNivel(nivel+1);
+            resultado.append(izquierdo.PreOrdenNivel(nivel + 1));
         }
         if (derecho != null) {
-            resultado = resultado + derecho.PreOrdenNivel(nivel+1);
+            resultado.append(derecho.PreOrdenNivel(nivel + 1));
         }
-        return resultado;
+        return resultado.toString();
     }
     public String PreOrdenDesdeClave(Comparable claveBusqueda, int nivelActual){
         if (this.etiqueta.compareTo(claveBusqueda) == 0) {
@@ -202,16 +160,43 @@ public class TElementoAB<T> implements IElementoAB<T> {
             return izquierdo;
         }
         TElementoAB<T> elHijo = izquierdo;
-        TElementoAB<T> elPadre=this.raiz;
+        TElementoAB<T> elPadre=this;
         if (elHijo.derecho!=null) {
             elPadre = elHijo;
             elHijo = elHijo.derecho;
         }
-        if (elPadre!=this.raiz) {
+        if (elPadre!=this) {
             elPadre.derecho = elHijo.izquierdo;
             elHijo.izquierdo=izquierdo;
         }
         elHijo.derecho=derecho;
         return elHijo;
+    }
+    @Override
+    public boolean insertar (TElementoAB<T> elemento){
+        if (elemento == null || elemento.getEtiqueta() == null) {
+            return false;
+        }
+
+        int comparacion = this.etiqueta.compareTo(elemento.getEtiqueta());
+
+        if (comparacion > 0) {
+            if (this.izquierdo == null) {
+                this.izquierdo = elemento;
+                return true;
+            } else {
+                return this.izquierdo.insertar(elemento);
+            }
+        } else if (comparacion < 0) {
+            if (this.derecho == null) {
+                this.derecho = elemento;
+                return true;
+            } else {
+                return this.derecho.insertar(elemento);
+            }
+        } else {
+
+            return false;
+        }
     }
 }

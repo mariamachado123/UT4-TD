@@ -1,35 +1,27 @@
-public class TArbol<T> implements IArbolBB<T>{
-    private TElementoAB<T> raiz;
+public class TArbol<T> implements IArbolBB<T> {
     public static final String SEPARADOR_ELEMENTOS_IMPRESOS = "-";
+
+    private TElementoAB<T> raiz;
+
     public TArbol() {
-        this.raiz = null;
+        raiz = null;
     }
+
     @Override
     public boolean insertar(TElementoAB<T> unElemento) {
-
-        if (unElemento == null || unElemento.getEtiqueta()==null) {
-            System.out.println("No se puede insertar");
-            return false;
-        }
         if (raiz == null) {
             raiz = unElemento;
-            System.out.println("RAIZ INSERTADO: " + unElemento.getEtiqueta().toString());
             return true;
         }
-
-        else {
-            raiz.insertar(unElemento);
-            System.out.println("Insertando " +unElemento.getEtiqueta().toString() + " en el árbol...");
-            return true;
-        }
+        return raiz.insertar(unElemento);
     }
+
 
     @Override
     public TElementoAB<T> buscar(Comparable unaEtiqueta) {
         if (raiz == null) {
             return null;
-        }
-        else {
+        } else {
             return raiz.buscar(unaEtiqueta);
         }
     }
@@ -38,8 +30,7 @@ public class TArbol<T> implements IArbolBB<T>{
     public String preOrden() {
         if (raiz == null) {
             return "";
-        }
-        else {
+        } else {
             return raiz.preOrden();
         }
     }
@@ -48,8 +39,7 @@ public class TArbol<T> implements IArbolBB<T>{
     public String inOrden() {
         if (raiz == null) {
             return "";
-        }
-        else {
+        } else {
             return raiz.inOrden();
         }
     }
@@ -58,22 +48,15 @@ public class TArbol<T> implements IArbolBB<T>{
     public String postOrden() {
         if (raiz == null) {
             return "";
-        }
-        else {
+        } else {
             return raiz.postOrden();
         }
     }
 
     @Override
     public void eliminar(Comparable unaEtiqueta) {
-        if (raiz == null) {
-            return;
-        }
-        if (raiz.buscar(unaEtiqueta) == null) {
-            return;
-        }
-        else {
-            raiz.eliminar(unaEtiqueta);
+        if (raiz != null) {
+            raiz = raiz.eliminar(unaEtiqueta);
         }
     }
     public String PreOrdenEtiqueta(Comparable etiquetaBuscada, int nivelInicio) {
@@ -84,4 +67,5 @@ public class TArbol<T> implements IArbolBB<T>{
         }
         return "";
     }
+
 }

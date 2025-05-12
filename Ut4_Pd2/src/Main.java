@@ -21,7 +21,6 @@ public class Main {
                 System.out.println("Error al parsear: " + linea);
             }
         }
-        TElementoAB<Integer> resultado=arbol.buscar(10635);
         TElementoAB<Integer> resultado1=arbol.buscar(4567);
         TElementoAB<Integer> resultado2=arbol.buscar(12);
         TElementoAB<Integer> resultado3=arbol.buscar(8978);
