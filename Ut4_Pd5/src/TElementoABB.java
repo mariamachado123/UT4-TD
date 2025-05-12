@@ -25,10 +25,8 @@ public class TElementoABB<T extends Comparable<T>> {
     public TElementoABB<T> getHijoDer(){
         return this.hijoDer;
     }
-    public TElementoABB<T>setHijoIzq(){return this.hijoIzq;}
-    public TElementoABB<T>setHijoDer(){return this.hijoDer;}
-    public boolean compararClaves(T otraClave) {
-        return this.clave.compareTo(otraClave) < 0;
+    public int compararClaves(T otraClave) {
+        return this.clave.compareTo(otraClave);
     }
     public T menorClave(){
         if(this.clave == null){
@@ -107,7 +105,25 @@ public class TElementoABB<T extends Comparable<T>> {
     public String toString(){
         return this.clave.toString();
     }
-
+    public boolean insertar(TElementoABB<T> unElemento) {
+        if (unElemento.getClave().compareTo(clave) < 0) {
+            if (hijoIzq != null) {
+                return getHijoIzq().insertar(unElemento);
+            } else {
+                hijoIzq = unElemento;
+                return true;
+            }
+        } else if (unElemento.getClave().compareTo(clave) > 0) {
+            if (hijoDer != null) {
+                return getHijoDer().insertar(unElemento);
+            } else {
+                hijoDer = unElemento;
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
     public boolean verificarABB(T minimo, T maximo){
         if(this==null){
             return true;

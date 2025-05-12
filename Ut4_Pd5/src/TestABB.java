@@ -8,11 +8,11 @@ public class TestABB{
     @BeforeEach
     public void setUp(){
         arbol = new TArbolBB<>();
-        arbol.insertar(new TElementoABB(1));
-        arbol.insertar(new TElementoABB(2));
-        arbol.insertar(new TElementoABB(3));
-        arbol.insertar(new TElementoABB(4));
-        arbol.insertar(new TElementoABB(5));
+        arbol.insertar(1, 1);
+        arbol.insertar(2, 2);
+        arbol.insertar(3, 3);
+        arbol.insertar(4, 4);
+        arbol.insertar(5, 5);
 
     }
     @Test
@@ -35,12 +35,12 @@ public class TestABB{
     @Test
     public void testContNiveles(){
         TArbolBB<Integer> arbol2 = new TArbolBB<>();
-        arbol2.insertar(new TElementoABB(4));
-        arbol2.insertar(new TElementoABB(2));
-        arbol2.insertar(new TElementoABB(1));
-        arbol2.insertar(new TElementoABB(5));
-        arbol2.insertar(new TElementoABB(6));
-        arbol2.insertar(new TElementoABB(7));
+        arbol2.insertar(4, 4);
+        arbol2.insertar(2, 2);
+        arbol2.insertar(1, 1);
+        arbol2.insertar(5, 5);
+        arbol2.insertar(6, 6);
+        arbol2.insertar(7, 7);
         int cantNivel2=arbol2.contNivelesABB(2);
         assertEquals(2,cantNivel2);
         System.out.println( "NIVEL 2: " + cantNivel2);
@@ -52,12 +52,12 @@ public class TestABB{
     @Test
     public void testVerificarABB(){
         TArbolBB<Integer> arbol2 = new TArbolBB<>();
-        arbol2.insertar(new TElementoABB(4));
-        arbol2.insertar(new TElementoABB(2));
-        arbol2.insertar(new TElementoABB(1));
-        arbol2.insertar(new TElementoABB(5));
-        arbol2.insertar(new TElementoABB(6));
-        arbol2.insertar(new TElementoABB(7));
+        arbol2.insertar(4, 4);
+        arbol2.insertar(2, 2);
+        arbol2.insertar(1, 1);
+        arbol2.insertar(5, 5);
+        arbol2.insertar(6, 6);
+        arbol2.insertar(7, 7);
         assertTrue(arbol2.verificarABB());
         System.out.println( "VERIFICAR ABB: " + arbol2.verificarABB());
     }
